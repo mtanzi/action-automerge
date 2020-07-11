@@ -29,13 +29,13 @@ on:
 
 jobs:
   update-cms-master:
-    name: Merge master into cms/master after a PR is merged
+    name: Merge master into release after a PR is merged
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v2
       - name: merge
-        uses: mtanzi/action-automerge
+        uses: mtanzi/action-automerge@v1
         id: merge
         with:
           github_token: ${{ github.token }}
