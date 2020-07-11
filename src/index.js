@@ -2,10 +2,8 @@ const github = require('@actions/github')
 const core = require('@actions/core');
 const { Octokit } = require('@octokit/rest')
 
-const job = JSON.parse(core.getInput('job'));
 const token = core.getInput('github_token')
 const octokit = new Octokit({ auth: token })
-
 const repo = github.context.repo
 
 async function merge(source, target) {
