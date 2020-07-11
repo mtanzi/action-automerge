@@ -71,7 +71,9 @@ async function run() {
 
   try {
     await merge(source, target)
+    await slackMessage(source, target, 'success')
   } catch (error) {
+    await slackMessage(source, target, 'failure')
     core.setFailed(`${source} merge failed: ${error.message}`)
   }
 
