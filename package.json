@@ -9,11 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mtanzi/automerge.git"
+    "url": "git+https://github.com/mtanzi/action-automerge.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "actions",
+    "slack",
+    "notify",
+    "github",
+    "merge"
+  ],
+  "author": "Marco Tanzi",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/actions/hello-world-javascript-action/issues"
   },
