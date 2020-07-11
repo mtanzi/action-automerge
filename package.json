@@ -26,6 +26,7 @@
   "homepage": "https://github.com/actions/hello-world-javascript-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^1.1.0"
+    "@actions/github": "^1.1.0",
+    "slack-notify": "^0.1.7"
   }
 }
