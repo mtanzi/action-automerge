@@ -1,0 +1,19 @@
+name: 'Action-Automerge'
+description: 'Merge source branch into target branch.'
+inputs:
+  github_token:
+    description: 'Token to authenticate with GitHub'
+    required: true
+    default: ${{ github.token }}
+  source:
+    description: 'Source branch you want to merge into the target.'
+    required: true
+  target:
+    description: 'Target branch, where the source branch is going to be merged into'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: git-merge
+  color: green
