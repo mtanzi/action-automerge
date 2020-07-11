@@ -35,7 +35,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: merge
-        uses: mtanzi/action-automerge
+        uses: mtanzi/action-automerge@v1
         id: merge
         with:
           github_token: ${{ github.token }}
