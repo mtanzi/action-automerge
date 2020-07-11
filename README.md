@@ -1,0 +1,2 @@
+# action-automerge
+action-automerge
