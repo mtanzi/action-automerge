@@ -16414,6 +16414,14 @@ function removeHook (state, name, method) {
 
 /***/ }),
 
+/***/ 323:
+/***/ (function(module) {
+
+module.exports = eval("require")("slack-notify");
+
+
+/***/ }),
+
 /***/ 324:
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -24267,10 +24275,56 @@ module.exports = /^#!.*/;
 const github = __webpack_require__(148)
 const core = __webpack_require__(827);
 const { Octokit } = __webpack_require__(756)
+const slack = __webpack_require__(323)(core.getInput('webhook_url'));
 
 const token = core.getInput('github_token')
 const octokit = new Octokit({ auth: token })
 const repo = github.context.repo
+
+function slackSuccessMessage(source, target, status) {
+  return {
+      color: "#27ae60",
+      icon: ":white_check_mark:",
+      message: `${source} was successfully merged into ${target}.`,
+      description: `*${target}* can be pushed to production!`
+  }
+}
+
+function slackErrorMessage(source, target, status) {
+  return {
+      color: "#C0392A",
+      icon: ":red_circle:",
+      message: `*${source}* has confilct with *${target}*.`,
+      description: ":face_with_head_bandage: Fix me please :pray:"
+  }
+}
+
+async function slackMessage(source, target, status) {
+  try {
+    let payload = status == 'success' ?
+                  slackSuccessMessage(source, target, status) :
+                  slackErrorMessage(source, target, status)
+
+    slack.send({
+      icon_emoji: payload.icon,
+      username: payload.message,
+      attachments: [
+          {
+              author_name: github.context.payload.repository.full_name,
+              author_link: `https://github.com/${github.context.payload.repository.full_name}/`,
+              title: payload.message,
+              text: payload.description,
+              color: payload.color,
+              fields: [
+                  { title: 'Job Status', value: status, short: false },
+              ],
+          },
+      ],
+    });
+  } catch (error) {
+      core.setFailed(error.message);
+  }
+}
 
 async function merge(source, target) {
   core.info(`merge branch:${source} to: ${target}`)
