@@ -27,8 +27,6 @@ function slackErrorMessage(source, target, status) {
 
 async function slackMessage(source, target, status) {
   if (core.getInput('webhook_url')) {
-    const slack = require('slack-notify')(core.getInput('webhook_url'));
-
     let payload = status == 'success' ?
                   slackSuccessMessage(source, target, status) :
                   slackErrorMessage(source, target, status)
