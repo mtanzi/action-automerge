@@ -13,7 +13,7 @@ inputs:
     required: true
   webhook_url:
     description: 'Slack webhook url'
-    required: true
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
